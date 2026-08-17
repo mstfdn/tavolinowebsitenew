@@ -311,17 +311,38 @@ img{max-width:100%;display:block}
   .static-hero{display:block}
 }
 
-/* phones: the journey plays, so the words move out of the table's way */
+/* Phones. A portrait crop of 16:9 footage is a narrow vertical slice, so the
+   hero is recomposed rather than shrunk: a smaller mark, one top veil doing
+   the legibility work, tighter type with real margins, and a settle block
+   that stacks instead of squeezing. */
 @media (max-width:720px){
+  .nav{padding:.72rem 1.15rem}
+  .nav .logo{--logo-size:.66rem}
+  .logo-sub{font-size:calc(var(--logo-size,1.02rem) * .44);letter-spacing:.1em}
+
   .hero{height:340vh}
-  .band-1,.band-2{left:1.15rem;right:1.15rem;max-width:none;top:15vh}
-  .band-1 .line,.band-2 .line{font-size:clamp(2rem,9.4vw,2.8rem)}
-  .band-2{top:15vh}
-  .band-4{top:11vh;width:calc(100% - 2.3rem)}
-  .band-4 .line{font-size:clamp(2.2rem,11vw,3.2rem)}
-  .band-4 .sub{font-size:.68rem;letter-spacing:.13em;padding:.55rem .85rem}
-  .band-4 .cta-row{margin-top:1.5rem}
-  .band::before{inset:-14% -20%}
+  .vignette-top{
+    height:56vh;
+    background:linear-gradient(to bottom,rgba(10,7,10,.9) 0%,rgba(10,7,10,.6) 44%,rgba(10,7,10,0) 100%);
+  }
+
+  .band-1,.band-2{left:1.35rem;right:1.35rem;max-width:none;top:13.5vh}
+  .band-1 .line,.band-2 .line{font-size:clamp(1.75rem,7.8vw,2.35rem);line-height:1.07}
+  .band-2{top:13.5vh}
+  .band::before{inset:-11% -15%}
+
+  .band-4{top:10.5vh;left:1.35rem;right:1.35rem;transform:none;width:auto}
+  .band-4 .line{font-size:clamp(1.9rem,8.6vw,2.6rem);line-height:1.05}
+  .band-4 .sub{
+    font-size:.66rem;letter-spacing:.12em;line-height:1.85;
+    padding:.65rem 1rem;margin-top:1.3rem;
+  }
+  .band-4 .sub span{display:block}
+  .band-4 .sub .dot{display:none}
+  .band-4 .cta-row{margin-top:1.35rem;flex-direction:column;gap:.6rem}
+  .band-4 .cta-row .btn{width:100%}
+
+  .cue{bottom:1.6rem;font-size:.58rem}
 }
 
 /* ---------- section furniture ---------- */
@@ -596,7 +617,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
       <div class="band band-4 e-rise" data-a="0.68" data-b="1" data-split="word">
         <div class="line" data-text="Bugün de açığız."></div>
-        <p class="sub">Her gün 08:00 - 01:00 · 23 Nisan, Nilüfer</p>
+        <p class="sub"><span>Her gün 08:00 - 01:00</span><span class="dot" aria-hidden="true"> · </span><span>23 Nisan, Nilüfer</span></p>
         <div class="cta-row">
           <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tavolino%20Cafe%20%26%20Restaurant%2C%2023%20Nisan%2C%20Mithatpa%C5%9Fa%20Cd.%2017-A%2C%2016130%20Nil%C3%BCfer%2FBursa" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
