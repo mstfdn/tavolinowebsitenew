@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tavolino Cafe &amp; Restaurant · Nilüfer, Bursa</title>
+<meta name="description" content="Bir masa, on yedi saat. Kahvaltı, kahve, pizza ve burger. Her gün 08:00 - 01:00, 23 Nisan Mahallesi, Nilüfer, Bursa.">
+<meta name="theme-color" content="#1A1116">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1116'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%23B98CF0'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tavolino Cafe &amp; Restaurant">
+<meta property="og:description" content="Sabah kahvaltı, gece burger. Her gün 08:00 - 01:00, Nilüfer, Bursa.">
+<meta property="og:url" content="https://tavolino.vercel.app/">
+<meta property="og:image" content="https://tavolino.vercel.app/assets/hero-ending.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,700&family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+
+<style>
+:root{
+  --canvas:#1A1116;
+  --canvas-deep:#130C10;
+  --panel:#241A21;
+  --panel-2:#2C2029;
+  --accent:#6D3FA8;
+  --accent-hover:#7E4CBE;
+  --accent-bright:#B98CF0;
+  --accent-muted:#3A2748;
+  --ember:#E0955A;
+  --text-primary:#F4EFE9;
+  --text-secondary:#B9ADA6;
+  --border-strong:#7A6770;
+  --hairline:rgba(244,239,233,.13);
+  --tshadow:0 1px 2px rgba(5,5,10,.95),0 3px 12px rgba(5,5,10,.78),0 10px 44px rgba(5,5,10,.8);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-soft:cubic-bezier(.4,0,.2,1);
+  --display:"Archivo",system-ui,sans-serif;
+  --body:"Newsreader",Georgia,serif;
+  --mono:"DM Mono",ui-monospace,monospace;
+  --shell:min(1180px,92vw);
+}
+
+*{box-sizing:border-box}
+html,body{overflow-x:hidden;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--canvas);color:var(--text-primary);
+  font-family:var(--body);font-size:clamp(16px,1.05vw + 12px,19px);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  animation:pageIn .9s var(--ease) both;
+}
+@keyframes pageIn{from{opacity:0}to{opacity:1}}
+
+h1,h2,h3,.display{
+  font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 700;
+  font-weight:700;letter-spacing:.02em;line-height:1.04;margin:0;
+  text-transform:uppercase;
+}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+.kicker{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent-bright);margin:0 0 1.1rem
+}
+.lede{color:var(--text-secondary);max-width:62ch}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:99;background:var(--accent);color:#fff;padding:.8rem 1.2rem;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px;border-radius:2px}
+
+/* ---------- the fixed environment layer ---------- */
+.env{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.env::before{
+  content:"";position:absolute;inset:-25%;
+  background:
+    radial-gradient(ellipse 44% 38% at 22% 26%,rgba(224,149,90,.10),transparent 62%),
+    radial-gradient(ellipse 40% 42% at 78% 68%,rgba(109,63,168,.13),transparent 64%);
+  animation:envDrift 96s var(--ease-soft) -22s infinite alternate;
+}
+.env::after{
+  content:"";position:absolute;inset:0;opacity:.05;
+  background-image:radial-gradient(rgba(244,239,233,.9) .5px,transparent .5px);
+  background-size:3px 3px;
+}
+@keyframes envDrift{
+  0%{transform:translate3d(-2.5%,-1.5%,0) scale(1.04)}
+  100%{transform:translate3d(2.5%,2%,0) scale(1.1)}
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  display:flex;align-items:center;gap:1.5rem;
+  padding:.9rem max(4vw,1.1rem);
+  background:linear-gradient(to bottom,rgba(19,12,16,.9),rgba(19,12,16,0));
+  transition:background .5s var(--ease),backdrop-filter .5s var(--ease),border-color .5s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.solid{background:rgba(19,12,16,.86);backdrop-filter:blur(14px);border-bottom-color:var(--hairline)}
+.nav-links{display:flex;gap:1.6rem;margin-left:auto;align-items:baseline}
+.nav-links a{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;color:var(--text-secondary);transition:color .35s var(--ease);
+}
+.nav-links a:hover{color:var(--text-primary)}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* ---------- the logo, redrawn ---------- */
+.logo{display:inline-flex;flex-direction:column;text-decoration:none;line-height:1;flex:0 0 auto}
+.logo-frame{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  padding:.44em .8em .3em;border:1px solid var(--text-primary);
+}
+.logo-word{
+  font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 600;
+  font-size:var(--logo-size,1.02rem);letter-spacing:.2em;text-indent:.2em;
+  color:var(--text-primary);white-space:nowrap;
+}
+.logo-mark{
+  position:absolute;top:calc(-.34em - 1px);left:50%;transform:translateX(-50%);
+  width:.62em;height:.42em;background:var(--accent-bright);
+  font-size:var(--logo-size,1.02rem);
+}
+.logo-frame::before,.logo-frame::after{
+  content:"";position:absolute;top:-1px;height:1px;background:var(--canvas);
+}
+.logo-frame::before{left:calc(50% - .42em);width:.84em;font-size:var(--logo-size,1.02rem)}
+.logo-frame::after{display:none}
+.logo-sub{
+  font-family:var(--mono);font-size:calc(var(--logo-size,1.02rem) * .38);
+  letter-spacing:.13em;color:var(--text-secondary);
+  align-self:flex-end;margin-top:.3em;padding-right:.1em;
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.13em;text-transform:uppercase;
+  padding:.86rem 1.5rem;border-radius:2px;text-decoration:none;border:1px solid transparent;
+  transition:background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease),transform .4s var(--ease);
+  text-shadow:none;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-hover);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--border-strong);color:var(--text-primary)}
+.btn-ghost:hover{border-color:var(--accent-bright);color:var(--accent-bright);transform:translateY(-2px)}
+.btn svg{width:1em;height:1em;flex:0 0 auto}
+@media (pointer:coarse){.btn{min-height:44px}}
+
+/* ---------- hero ---------- */
+/* 400vh, not 640: the descent has to feel quick under the thumb. Three short
+   beats fit; a fourth would need the height back. */
+.hero{position:relative;height:400vh;z-index:1}
+.stage{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  background:var(--canvas-deep);
+}
+.poster,.stage video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.poster{background-size:cover;background-position:center;transition:opacity 1s var(--ease)}
+.stage video{opacity:0;transition:opacity 1s var(--ease);will-change:transform;transform:translateZ(0)}
+.stage.video-ready video{opacity:1}
+.stage.video-ready .poster{opacity:0}
+.stage.video-failed video{display:none}
+
+.scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,10,18,0) 35%,rgba(10,10,18,.62) 100%);
+}
+/* the descent veil: the footage brightens as the camera reaches the marble,
+   so the world settles with it. scroll-driven, and it is what keeps the late
+   bands legible over near-white tile. */
+.descend{position:absolute;inset:0;pointer-events:none;background:#0C080B;opacity:var(--veil,0)}
+.vignette-top{
+  position:absolute;left:0;right:0;top:0;height:34vh;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(12,8,11,.72),rgba(12,8,11,0));
+}
+
+.bands{position:absolute;inset:0;pointer-events:none}
+.band{
+  position:absolute;opacity:0;text-shadow:var(--tshadow);
+  will-change:opacity;
+}
+.band::before{
+  content:"";position:absolute;inset:-9% -16%;pointer-events:none;z-index:-1;
+  opacity:calc(.25 + .75*var(--k,1));
+  background:radial-gradient(ellipse 76% 68% at 50% 50%,rgba(5,5,10,.68) 0%,rgba(5,5,10,.48) 48%,rgba(5,5,10,0) 78%);
+}
+/* the late bands sit over the bright marble and tile, so their scrims run deeper */
+.band-2::before{
+  inset:-16% -32%;
+  background:radial-gradient(ellipse 94% 90% at 50% 50%,rgba(5,5,10,.88) 0%,rgba(5,5,10,.80) 56%,rgba(5,5,10,0) 100%);
+}
+.band-4::before{
+  inset:-22% -18%;
+  background:radial-gradient(ellipse 82% 74% at 50% 46%,rgba(5,5,10,.86) 0%,rgba(5,5,10,.66) 52%,rgba(5,5,10,0) 86%);
+}
+.band .btn{text-shadow:none}
+.band .btn-ghost{background:rgba(10,7,10,.66);backdrop-filter:blur(8px);border-color:var(--text-primary)}
+.band .btn-ghost:hover{background:rgba(10,7,10,.82);border-color:var(--accent-bright)}
+
+.band-1,.band-2{left:max(6vw,1.4rem);max-width:min(19ch,62vw);top:24vh}
+.band-1 .line,.band-2 .line{
+  font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 700;
+  font-size:clamp(2.1rem,4.8vw,4.4rem);line-height:1.02;text-transform:uppercase;letter-spacing:.01em;
+}
+/* band 2 lands where the lamp glow is brightest, so it sits higher */
+.band-2{top:18vh}
+
+.band-4{
+  left:50%;transform:translateX(-50%);top:13vh;text-align:center;
+  width:min(46ch,88vw);
+}
+.band-4 .line{
+  font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 700;
+  font-size:clamp(2.4rem,6vw,5.4rem);line-height:1;text-transform:uppercase;
+}
+/* small text over footage gets a chip, never the big radial alone */
+.band-4 .sub{
+  font-family:var(--mono);font-size:clamp(.74rem,1.1vw,.9rem);letter-spacing:.19em;
+  text-transform:uppercase;color:var(--text-primary);margin:1.5rem auto 0;
+  display:inline-block;padding:.6rem 1.1rem;
+  background:rgba(8,6,10,.62);border:1px solid rgba(122,103,112,.42);border-radius:10px;
+  backdrop-filter:blur(10px);text-shadow:0 1px 3px rgba(5,5,10,.85);
+  opacity:var(--ks,0);transform:translateY(calc((1 - var(--ks,0)) * 14px));
+}
+.band-4 .cta-row{
+  margin-top:2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;
+  pointer-events:auto;
+  opacity:var(--kb,0);transform:translateY(calc((1 - var(--kb,0)) * 16px));
+}
+
+/* text splitting */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.vis{display:block}
+.w{display:inline-block;white-space:nowrap}
+.c{display:inline-block;will-change:transform,opacity}
+
+/* (a) scatter */
+.e-scatter .c{
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);
+  transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px)))
+            rotate(calc((1 - var(--kc))*var(--jr,0deg)));
+}
+/* (c) blur-to-sharp */
+.e-blur .soft{position:absolute;inset:0;filter:blur(11px);opacity:calc(1 - var(--k,0));pointer-events:none}
+.e-blur{position:relative}
+.e-blur .sharp{opacity:var(--k,0)}
+/* (f) drift-down */
+.e-drift .w{
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);
+  transform:translateY(calc((1 - var(--kc))*-30px));
+}
+/* (d) word-punch */
+.e-punch .w{
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);
+  --ks2:clamp(0,(var(--k,0) - var(--th,0) - var(--sd,.1))*var(--ss,3.2),1);
+  opacity:var(--kc);
+  transform:scale(calc(0.62 + (0.38 + var(--ov,.13))*var(--kc) - var(--ov,.13)*var(--ks2)));
+}
+.e-punch .w.em{--ov:0.24;--sd:0.16;--ss:2.6;color:var(--accent-bright)}
+/* (e) word rise */
+.e-rise .w{
+  --kc:clamp(0,(var(--k,0) - var(--th,0))*2.7,1);opacity:var(--kc);
+  transform:translateY(calc((1 - var(--kc))*26px));
+}
+
+/* scroll cue */
+.cue{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;pointer-events:none;
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--text-secondary);text-shadow:var(--tshadow);
+  transition:opacity .6s var(--ease);
+}
+.cue svg{width:14px;height:20px;animation:cueBob 2.6s var(--ease-soft) -.6s infinite}
+@keyframes cueBob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(5px);opacity:1}}
+.hero-scrolled .cue{opacity:0}
+@media (max-height:560px){.cue{display:none}}
+
+/* ---------- static hero (phones, reduced motion) ---------- */
+.static-hero{display:none;position:relative;min-height:100svh;overflow:hidden;z-index:1}
+.static-hero .poster-still{
+  position:absolute;inset:0;background-size:cover;background-position:center 62%;
+}
+.static-hero .veil{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(12,8,11,.82) 0%,rgba(12,8,11,.42) 42%,rgba(19,12,16,.94) 100%);
+}
+.static-hero .inner{
+  position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  gap:1.1rem;padding:8rem max(6vw,1.4rem) 3.4rem;
+}
+.static-hero h1{font-size:clamp(2.4rem,11vw,4rem);text-shadow:var(--tshadow)}
+.static-hero .sub{color:var(--text-primary);max-width:32ch;text-shadow:var(--tshadow)}
+.static-hero .row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.6rem}
+
+/* Four gates, not five. Reduced motion deliberately does NOT gate the hero:
+   the owner asked for the journey to play for every visitor. The rest of the
+   page still calms down under reduced motion, in the block near the end. */
+@media (max-width:720px),
+       (orientation:portrait) and (max-width:1024px),
+       (orientation:portrait) and (pointer:coarse),
+       (orientation:landscape) and (pointer:coarse) and (max-height:560px){
+  .hero{display:none}
+  .static-hero{display:block}
+}
+
+/* ---------- section furniture ---------- */
+main{position:relative;z-index:1}
+section{position:relative}
+.shell{width:var(--shell);margin-inline:auto}
+.pad{padding:clamp(5rem,11vw,9rem) 0}
+
+.reveal>*{opacity:0;transform:translateY(22px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.in>*{opacity:1;transform:none}
+.reveal.in>*:nth-child(1){transition-delay:0ms}
+.reveal.in>*:nth-child(2){transition-delay:90ms}
+.reveal.in>*:nth-child(3){transition-delay:180ms}
+.reveal.in>*:nth-child(4){transition-delay:270ms}
+.reveal.in>*:nth-child(5){transition-delay:360ms}
+.reveal.done>*:nth-child(1),.reveal.done>*:nth-child(2),.reveal.done>*:nth-child(3),
+.reveal.done>*:nth-child(4),.reveal.done>*:nth-child(5){transition-delay:0s!important}
+
+/* ---------- 1. the hour rail (signature) ---------- */
+.rail-sec{background:linear-gradient(to bottom,var(--canvas) 0%,var(--canvas-deep) 100%)}
+.rail-head{max-width:44ch;margin-bottom:clamp(3rem,6vw,5rem)}
+.rail-head h2{font-size:clamp(1.9rem,4.4vw,3.4rem)}
+.rail-head .lede{margin-top:1.3rem}
+
+.rail{position:relative;display:grid;gap:0}
+.rail-line{
+  position:absolute;left:calc(.62rem - 1px);top:.7rem;bottom:2.4rem;width:1px;
+  background:var(--hairline);
+}
+.rail-line span{
+  position:absolute;left:0;top:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent-bright));
+  height:var(--railfill,0%);
+}
+.rail-cursor{
+  position:absolute;left:0;width:1.24rem;height:1.24rem;
+  background:var(--accent-bright);
+  top:calc(.7rem + (100% - 3.1rem) * var(--railp,0));
+  box-shadow:0 0 0 6px rgba(185,140,240,.12),0 0 26px 6px rgba(185,140,240,.26);
+  transition:box-shadow .6s var(--ease);
+}
+.hour{
+  position:relative;display:grid;grid-template-columns:3.6rem 1fr;gap:clamp(1rem,3vw,2.4rem);
+  padding:clamp(1.5rem,3.4vw,2.6rem) 0;border-top:1px solid var(--hairline);align-items:baseline;
+}
+.hour:first-of-type{border-top:0}
+.hour .t{
+  font-family:var(--mono);font-size:.86rem;letter-spacing:.06em;color:var(--accent-bright);
+  padding-left:2.1rem;
+}
+.hour h3{font-size:clamp(1.25rem,2.5vw,1.9rem);margin-bottom:.55rem}
+.hour p{color:var(--text-secondary);max-width:52ch;font-size:.96em}
+.hour.lit h3{color:var(--text-primary)}
+.hour:not(.lit) h3{color:var(--text-secondary);transition:color .7s var(--ease)}
+
+/* ---------- 2. story ---------- */
+.story{background:var(--canvas-deep);border-top:1px solid var(--hairline)}
+.story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2.4rem,6vw,5.5rem);align-items:center}
+@media (max-width:880px){.story-grid{grid-template-columns:1fr}}
+.story h2{font-size:clamp(1.9rem,4.6vw,3.6rem);margin-bottom:1.6rem}
+.story p+p{margin-top:1.1rem}
+.story .pull{
+  font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 600;
+  text-transform:uppercase;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.25;
+  color:var(--text-primary);border-left:2px solid var(--accent);padding-left:1.2rem;margin-top:2rem;
+}
+.story-art{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--panel)}
+.story-art img{width:100%;height:100%;object-fit:cover}
+.story-art::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(19,12,16,.66),rgba(19,12,16,0) 55%);
+}
+.story-art .tag{
+  position:absolute;left:1.1rem;bottom:1.1rem;z-index:2;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text-primary);background:rgba(8,8,15,.55);border:1px solid rgba(96,96,126,.3);
+  border-radius:10px;padding:.4rem .7rem;backdrop-filter:blur(10px);
+}
+
+/* ---------- 3. menu ---------- */
+.menu-sec{background:var(--canvas)}
+.menu-top{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
+.menu-top h2{font-size:clamp(1.9rem,4.4vw,3.4rem)}
+.menu-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.6rem,3.4vw,3.4rem)}
+@media (max-width:640px){.menu-cols{grid-template-columns:1fr}}
+.mcol h3{
+  font-size:.82rem;font-family:var(--mono);font-variation-settings:normal;font-weight:500;
+  letter-spacing:.22em;color:var(--accent-bright);padding-bottom:.9rem;border-bottom:1px solid var(--hairline);
+}
+.mitem{display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;padding:1.05rem 0;border-bottom:1px solid rgba(244,239,233,.06)}
+.mitem .n{font-weight:500;line-height:1.3}
+.mitem .p{font-family:var(--mono);font-size:.86rem;color:var(--text-primary);white-space:nowrap;align-self:baseline}
+.mitem .d{grid-column:1/-1;color:var(--text-secondary);font-size:.88em;line-height:1.5}
+.allergen{
+  margin-top:2.6rem;display:flex;gap:.9rem;align-items:flex-start;
+  border:1px solid var(--accent-muted);padding:1.1rem 1.3rem;background:rgba(109,63,168,.07);
+}
+.allergen svg{width:20px;height:20px;flex:0 0 auto;margin-top:.15rem;color:var(--accent-bright)}
+.allergen p{color:var(--text-secondary);font-size:.94em}
+
+/* ---------- 4. the interactive moment ---------- */
+.set-sec{background:var(--canvas-deep);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline)}
+.set-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2.4rem,6vw,5rem);align-items:center}
+@media (max-width:880px){.set-grid{grid-template-columns:1fr}}
+.set-copy h2{font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1.2rem}
+.set-hint{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent-bright);margin-top:1.8rem;display:flex;align-items:center;gap:.6rem;
+}
+.set-hint i{width:8px;height:8px;background:var(--accent-bright);display:block;animation:hintPulse 2.4s var(--ease-soft) -.8s infinite}
+@keyframes hintPulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+
+.table-wrap{position:relative;aspect-ratio:1/1;max-width:520px;margin-inline:auto;width:100%}
+.table-btn{
+  position:absolute;inset:0;background:none;border:0;padding:0;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;touch-action:none;
+}
+.table-svg{width:100%;height:100%;overflow:visible}
+.tbl-top{stroke:var(--border-strong);stroke-width:1}
+.tbl-edge{fill:none;stroke:rgba(244,239,233,.16);stroke-width:6}
+.tbl-ring{fill:none;stroke:var(--accent-muted);stroke-width:1}
+.tbl-prog{
+  fill:none;stroke:var(--accent-bright);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:1131;stroke-dashoffset:calc(1131 - 1131 * var(--hold,0));
+  filter:drop-shadow(0 0 6px rgba(185,140,240,.55));
+}
+/* the logo mark at the centre: the small table, seen from above */
+.tbl-mark{
+  fill:var(--accent-bright);transform-origin:center;transform-box:fill-box;
+  opacity:calc(.28 + .72 * var(--hold,0));
+  transform:rotate(calc(var(--hold,0) * 45deg)) scale(calc(.8 + .2 * var(--hold,0)));
+}
+/* each dish waits its turn: a ghost before, lit after */
+.dish{
+  --kd:clamp(0,(var(--hold,0) - var(--at,0)) * 6,1);
+  opacity:calc(.17 + .83 * var(--kd));
+  transform:scale(calc(.82 + .18 * var(--kd)));
+  transform-origin:center;transform-box:fill-box;
+}
+.dish .g{fill:none;stroke:var(--ember);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.dish .gf{fill:var(--ember);opacity:calc(.2 + .5 * var(--kd))}
+.dish .lbl{
+  fill:var(--text-secondary);font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.08em;
+  opacity:calc(.45 + .55 * var(--kd));
+}
+/* the hidden state must out-specify .reveal.in>* or the entrance reveals it early */
+.set-sec .set-copy .set-done{
+  margin-top:1.6rem;opacity:0;transform:translateY(10px);
+  transition:opacity .7s var(--ease),transform .7s var(--ease);
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-bright);
+}
+.set-sec.complete .set-copy .set-done{opacity:1;transform:none}
+
+/* ---------- 5. reviews ---------- */
+.rev-sec{background:var(--canvas)}
+.rev-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
+.rev-head h2{font-size:clamp(1.9rem,4.4vw,3.4rem)}
+.revs{columns:3;column-gap:clamp(1.2rem,2.6vw,2rem)}
+@media (max-width:980px){.revs{columns:2}}
+@media (max-width:640px){.revs{columns:1}}
+.rev{
+  break-inside:avoid;background:var(--panel);border:1px solid var(--hairline);
+  padding:1.5rem 1.6rem;margin-bottom:clamp(1.2rem,2.6vw,2rem);position:relative;
+}
+.rev::before{
+  content:"";position:absolute;left:0;top:0;width:3px;height:0;background:var(--accent);
+  transition:height .9s var(--ease);
+}
+.revs.in .rev::before{height:100%}
+.rev .stars{display:flex;gap:3px;margin-bottom:.9rem}
+.rev .stars i{width:7px;height:7px;background:var(--accent-bright);display:block}
+.rev q{quotes:none;display:block;line-height:1.6}
+.rev .who{
+  margin-top:1rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-secondary);
+}
+
+/* ---------- 6. info strip ---------- */
+.info-sec{background:var(--canvas-deep);border-top:1px solid var(--hairline)}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
+@media (max-width:880px){.info-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.info-grid{grid-template-columns:1fr}}
+.info{background:var(--canvas-deep);padding:clamp(1.6rem,3.4vw,2.4rem);display:flex;flex-direction:column;gap:.7rem}
+.info svg{width:24px;height:24px;color:var(--accent-bright)}
+.info b{font-family:var(--display);font-variation-settings:"wdth" 125,"wght" 600;text-transform:uppercase;font-size:.95rem;letter-spacing:.05em}
+.info span{color:var(--text-secondary);font-size:.92em}
+
+/* ---------- 7. come (the single CTA) ---------- */
+.come{position:relative;background:var(--canvas);overflow:hidden}
+.come-inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+@media (max-width:880px){.come-inner{grid-template-columns:1fr}}
+.come h2{font-size:clamp(2.1rem,5.4vw,4.4rem);margin-bottom:1.4rem}
+.come .addr{font-family:var(--mono);font-size:.92rem;line-height:1.9;color:var(--text-secondary)}
+.come .addr b{color:var(--text-primary);font-weight:400}
+.come .row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2.2rem}
+.map{
+  position:relative;aspect-ratio:1/1;border:1px solid var(--hairline);overflow:hidden;background:var(--panel);
+}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) hue-rotate(190deg) contrast(.86) saturate(.7)}
+
+/* ---------- footer ---------- */
+footer{background:var(--canvas-deep);border-top:1px solid var(--hairline);padding:clamp(3rem,6vw,4.5rem) 0 2.4rem}
+.foot-grid{display:flex;justify-content:space-between;gap:2.4rem;flex-wrap:wrap;align-items:flex-start}
+.foot-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.foot-links a{font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:color .35s var(--ease)}
+.foot-links a:hover{color:var(--accent-bright)}
+.foot-bot{margin-top:3rem;padding-top:1.6rem;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;gap:1.4rem;flex-wrap:wrap}
+.foot-bot p{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--text-secondary)}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;transition-delay:0s!important;
+  }
+  .reveal>*{opacity:1;transform:none}
+  .rev::before{height:100%}
+  .env::before{animation:none}
+  .dish{opacity:1;transform:scale(1)}
+  .tbl-mark{opacity:1;transform:none}
+  .tbl-prog{stroke-dashoffset:0}
+  .set-sec .set-done{opacity:1;transform:none}
+  .rail-cursor{top:auto;bottom:2.4rem}
+  .rail-line span{height:100%}
+  .hour h3{color:var(--text-primary)}
+}
+body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused!important}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<div class="env" aria-hidden="true"></div>
+
+<nav class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Tavolino Cafe and Restaurant, ana sayfa">
+    <span class="logo-frame"><span class="logo-mark" aria-hidden="true"></span><span class="logo-word">TAVOLINO</span></span>
+    <span class="logo-sub">CAFE &amp; RESTAURANT</span>
+  </a>
+  <div class="nav-links">
+    <a href="#gun">Bir Gün</a>
+    <a href="#hikaye">Hikaye</a>
+    <a href="#menu">Menü</a>
+    <a href="#yorumlar">Yorumlar</a>
+    <a href="#gel">Gel</a>
+  </div>
+</nav>
+
+<div id="top"></div>
+
+<!-- ===== scrub hero ===== -->
+<div class="hero" id="hero">
+  <div class="stage" id="stage">
+    <div class="poster" id="poster" aria-hidden="true"></div>
+    <video id="hero-video" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="descend" id="descend" aria-hidden="true"></div>
+    <div class="vignette-top" aria-hidden="true"></div>
+
+    <div class="bands" id="bands">
+      <div class="band band-1 e-blur" data-a="0" data-b="0.26">
+        <span class="sr-only">Sabah sekizde kahvaltı.</span>
+        <div class="line" aria-hidden="true">
+          <span class="soft">Sabah sekizde<br>kahvaltı.</span>
+          <span class="sharp">Sabah sekizde<br>kahvaltı.</span>
+        </div>
+      </div>
+
+      <div class="band band-2 e-punch" data-a="0.33" data-b="0.60" data-split="word" data-em="burger.">
+        <div class="line" data-text="Gece birde burger."></div>
+      </div>
+
+      <div class="band band-4 e-rise" data-a="0.68" data-b="1" data-split="word">
+        <div class="line" data-text="Bugün de açığız."></div>
+        <p class="sub">Her gün 08:00 - 01:00 · 23 Nisan, Nilüfer</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tavolino%20Cafe%20%26%20Restaurant%2C%2023%20Nisan%2C%20Mithatpa%C5%9Fa%20Cd.%2017-A%2C%2016130%20Nil%C3%BCfer%2FBursa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Yol tarifi al
+          </a>
+          <a class="btn btn-ghost" href="tel:+902249995056">Ara</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cue" id="cue" aria-hidden="true">
+      <span>Kaydır</span>
+      <svg viewBox="0 0 14 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 1v16m0 0 5-5m-5 5-5-5"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== static hero (phones, reduced motion) ===== -->
+<header class="static-hero" id="static-hero">
+  <div class="poster-still" id="poster-still" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="inner">
+    <p class="kicker">Nilüfer, Bursa</p>
+    <h1>Sabah kahvaltı,<br>gece burger.</h1>
+    <p class="sub">Kahve, pizza, makarna ve ızgara da var. Her gün 08:00 - 01:00 açığız.</p>
+    <div class="row">
+      <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tavolino%20Cafe%20%26%20Restaurant%2C%2023%20Nisan%2C%20Mithatpa%C5%9Fa%20Cd.%2017-A%2C%2016130%20Nil%C3%BCfer%2FBursa" target="_blank" rel="noopener">Yol tarifi al</a>
+      <a class="btn btn-ghost" href="tel:+902249995056">Ara</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ===== 1. the hour rail ===== -->
+  <section class="rail-sec pad" id="gun">
+    <div class="shell">
+      <div class="rail-head reveal">
+        <p class="kicker">Gün boyu</p>
+        <h2>Saat kaçta gelirseniz gelin</h2>
+        <p class="lede">Kahvaltıcılar öğlen kapanır, burgerciler sabah açılmaz. Biz sabah sekizde açıyoruz, gece bire kadar mutfak çalışıyor. Hangi saatte gelirseniz size uygun bir şey var.</p>
+      </div>
+
+      <div class="rail" id="rail">
+        <div class="rail-line" aria-hidden="true"><span></span></div>
+        <div class="rail-cursor" id="rail-cursor" aria-hidden="true"></div>
+
+        <article class="hour">
+          <div class="t">08:00</div>
+          <div>
+            <h3>Kahvaltı başlıyor</h3>
+            <p>Serpme sofra, köy yumurtası, menemen, taze sıkılmış portakal suyu. İki kişilik serpme 480 lira ve müşterilerimizin ortak yorumu şu: bitirmeniz mümkün değil.</p>
+          </div>
+        </article>
+
+        <article class="hour">
+          <div class="t">12:00</div>
+          <div>
+            <h3>Fırın ve mutfak devrede</h3>
+            <p>Pizza, makarna, salatalar. Mangal pizzamız yıllardır aynı tarifle çıkıyor, en çok sorulan da o.</p>
+          </div>
+        </article>
+
+        <article class="hour">
+          <div class="t">16:00</div>
+          <div>
+            <h3>Kahve ve tatlı</h3>
+            <p>Filtre, espresso, cold brew. Yanına profiterol ya da sufle. Laptopla oturana da, üç saat sohbet edene de kimse bir şey demez.</p>
+          </div>
+        </article>
+
+        <article class="hour">
+          <div class="t">20:00</div>
+          <div>
+            <h3>Akşam yemeği</h3>
+            <p>Burgerler, karışık ızgara, tavuk. Çocuk menüsü var, köpeğinizi de içeri alıyoruz, açık hava bölümü havası güzel her gün açık.</p>
+          </div>
+        </article>
+
+        <article class="hour">
+          <div class="t">01:00</div>
+          <div>
+            <h3>Kapanış</h3>
+            <p>Mutfak kapanana kadar açık. Gece yarısı acıkırsanız gelin, hâlâ buradayız.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. story ===== -->
+  <section class="story pad" id="hikaye">
+    <div class="shell story-grid">
+      <div class="reveal">
+        <p class="kicker">Hakkımızda</p>
+        <h2>23 Nisan'da yıllardır aynı yerdeyiz</h2>
+        <p class="lede">Etrafımızda mekanlar açıldı, kapandı, yeniden açıldı. Biz aynı yerde, aynı mutfakla devam ediyoruz. Menüye yeni şeyler ekledik ama eski tarifleri bozmadık.</p>
+        <p class="lede">Buraya gelenlerin çoğu ilk kez gelmiyor. Kimi kahvaltıya, kimi akşam yemeğine, kimi sadece kahve içip iki saat oturmaya geliyor. Hepsi bizim için aynı.</p>
+        <p class="pull">Yıllardır kaliteyi bozmadan devam ediyorlar.</p>
+        <p class="lede" style="margin-top:.9rem;font-size:.86em">Bir müşterimizin Google yorumundan.</p>
+      </div>
+      <div class="story-art reveal">
+        <img id="story-img" alt="Tavolino'nun akşam ışığındaki iç mekanı" loading="lazy" width="1200" height="1500">
+        <span class="tag">Nilüfer, Bursa</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. menu ===== -->
+  <section class="menu-sec pad" id="menu">
+    <div class="shell">
+      <div class="menu-top reveal">
+        <div>
+          <p class="kicker">Menü</p>
+          <h2>Ne var, kaça var</h2>
+        </div>
+        <p class="lede" style="max-width:38ch">Fiyatları siteye koyduk ki gelmeden önce bilesiniz. Hesapta sürpriz olmaz. Menü mevsime göre değişir, güncel hali her zaman masada.</p>
+      </div>
+
+      <div class="menu-cols">
+        <div class="mcol reveal">
+          <h3>KAHVALTI</h3>
+          <div class="mitem"><span class="n">Tavolino Serpme Kahvaltı</span><span class="p">480 ₺</span><span class="d">İki kişilik. Sıcak ekmek çeşitleri, reçeller, zeytinler, peynir tabağı, sucuk ve taze sıkılmış portakal suyu.</span></div>
+          <div class="mitem"><span class="n">Kaşarlı Köy Omleti</span><span class="p">180 ₺</span><span class="d">Tereyağında pişmiş taze köy yumurtası ve kaşar peyniriyle.</span></div>
+          <div class="mitem"><span class="n">Menemen</span><span class="p">170 ₺</span><span class="d">Domates, biber ve yumurta ile geleneksel usul.</span></div>
+          <div class="mitem"><span class="n">Avokadolu Tost</span><span class="p">160 ₺</span><span class="d">Ezme avokado, roka ve cherry domates ile.</span></div>
+          <div class="mitem"><span class="n">Simit Tabağı</span><span class="p">140 ₺</span><span class="d">Beyaz peynir, kaşar, zeytin ve domates ile.</span></div>
+        </div>
+
+        <div class="mcol reveal">
+          <h3>PİZZA VE MAKARNA</h3>
+          <div class="mitem"><span class="n">Mangal Pizza</span><span class="d">Yıllardır aynı tarif. En çok sorulan pizzamız.</span></div>
+          <div class="mitem"><span class="n">Margarita</span><span class="d">Domates, mozzarella, taze fesleğen. Bir kişiye fazla gelir.</span></div>
+          <div class="mitem"><span class="n">Karışık Pizza</span><span class="d">Sucuk, sosis, mantar, biber, mısır.</span></div>
+          <div class="mitem"><span class="n">Makarnalar</span><span class="d">Kremalı, domatesli ve acılı seçenekler. Garsonunuza sorun.</span></div>
+          <p class="d" style="padding-top:1.05rem;color:var(--text-secondary);font-size:.88em">Pizza ve makarna fiyatları için bize sorun, siteye de eklemek isterseniz söyleyin.</p>
+        </div>
+
+        <div class="mcol reveal">
+          <h3>MUTFAK</h3>
+          <div class="mitem"><span class="n">Double Cheese Burger</span><span class="p">290 ₺</span><span class="d">Çift dana köfte, çift kaşar, özel sos ve kızarmış patates ile.</span></div>
+          <div class="mitem"><span class="n">Tavolino Klasik Burger</span><span class="p">250 ₺</span><span class="d">Dana köfte, cheddar, marul, domates, turşu.</span></div>
+          <div class="mitem"><span class="n">Karışık Izgara</span><span class="p">380 ₺</span><span class="d">Dana pirzola, tavuk şiş, köfte ve mevsim garnitür.</span></div>
+          <div class="mitem"><span class="n">Kaşarlı Pilav Üstü Tavuk</span><span class="p">260 ₺</span><span class="d">Izgara tavuk, sote sebze, tereyağlı pilav.</span></div>
+          <div class="mitem"><span class="n">Asya Usulü Sebze Salatası</span><span class="p">210 ₺</span><span class="d">Mevsim yeşillikleri, susam ve özel Asya sos ile.</span></div>
+        </div>
+
+        <div class="mcol reveal">
+          <h3>KAHVE VE TATLI</h3>
+          <div class="mitem"><span class="n">Filtre Kahve</span><span class="d">Günün çekirdeği, taze öğütülmüş.</span></div>
+          <div class="mitem"><span class="n">Cold Brew</span><span class="d">Soğuk demleme, on iki saat bekletilmiş.</span></div>
+          <div class="mitem"><span class="n">Espresso ve sütlü kahveler</span><span class="d">Süt oranını söyleyin, ona göre yaparız.</span></div>
+          <div class="mitem"><span class="n">Dondurmalı Profiterol</span><span class="d">Müşterilerimizin en çok yazdığı tatlı.</span></div>
+          <div class="mitem"><span class="n">Sufle</span><span class="d">Sıcak servis edilir, on dakika sürer.</span></div>
+          <p class="d" style="padding-top:1.05rem;color:var(--text-secondary);font-size:.88em">Kahve ve tatlı fiyatları için sorun, siteye eklememizi isterseniz söyleyin.</p>
+        </div>
+      </div>
+
+      <div class="allergen reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+        <p><b style="color:var(--text-primary);font-weight:400">Gluten, çölyak ya da alerji.</b> Bir şeyden emin değilseniz sorun. Garsonumuz bilmiyorsa mutfağa birlikte sorarız. Tahmin yürütmüyoruz.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. the interactive moment ===== -->
+  <section class="set-sec pad" id="masa">
+    <div class="shell set-grid">
+      <div class="set-copy reveal">
+        <p class="kicker">Deneyin</p>
+        <h2>Bir günümüz böyle geçiyor</h2>
+        <p class="lede">Sabah sekizden gece bire kadar masaya ne geliyor, anlatmak yerine göstermek daha kolay. Butona basılı tutun.</p>
+        <p class="set-hint"><i aria-hidden="true"></i> Basılı tutun</p>
+        <p class="set-done" id="set-done">Sabah sekizden gece bire. Sizinki de hazır.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <button class="table-btn" id="table-btn" aria-label="Basılı tutarak masayı kurun">
+          <svg class="table-svg" viewBox="0 0 400 400" aria-hidden="true">
+            <defs>
+              <radialGradient id="marble" cx="38%" cy="30%" r="82%">
+                <stop offset="0%" stop-color="#4A3A44"/>
+                <stop offset="58%" stop-color="#312430"/>
+                <stop offset="100%" stop-color="#241A21"/>
+              </radialGradient>
+            </defs>
+
+            <circle class="tbl-ring" cx="200" cy="200" r="180"/>
+            <circle class="tbl-prog" cx="200" cy="200" r="180" transform="rotate(-90 200 200)"/>
+            <circle class="tbl-edge" cx="200" cy="200" r="152"/>
+            <circle class="tbl-top" cx="200" cy="200" r="150" fill="url(#marble)"/>
+
+            <!-- 08:00 serpme kahvaltı: a full plate seen from above -->
+            <g class="dish" style="--at:.02">
+              <circle class="g" cx="200" cy="106" r="27"/>
+              <circle class="gf" cx="191" cy="99" r="5.5"/>
+              <circle class="g" cx="209" cy="103" r="6.5"/>
+              <circle class="gf" cx="196" cy="115" r="4"/>
+              <circle class="g" cx="208" cy="116" r="5"/>
+              <text class="lbl" x="200" y="152" text-anchor="middle">08:00 KAHVALTI</text>
+            </g>
+
+            <!-- 12:00 pizza: a round pie, cut in six -->
+            <g class="dish" style="--at:.27">
+              <circle class="g" cx="294" cy="200" r="27"/>
+              <circle class="g" cx="294" cy="200" r="21"/>
+              <path class="g" d="M294 179v42M275.8 189.5l36.4 21M275.8 210.5l36.4-21"/>
+              <text class="lbl" x="294" y="246" text-anchor="middle">12:00 PİZZA</text>
+            </g>
+
+            <!-- 16:00 kahve: cup and saucer from above -->
+            <g class="dish" style="--at:.52">
+              <circle class="g" cx="200" cy="294" r="27"/>
+              <circle class="g" cx="200" cy="294" r="16"/>
+              <circle class="gf" cx="200" cy="294" r="10"/>
+              <path class="g" d="M227 294a7 7 0 0 0 10 0"/>
+              <text class="lbl" x="200" y="340" text-anchor="middle">16:00 KAHVE</text>
+            </g>
+
+            <!-- 21:00 burger: sesame bun from above -->
+            <g class="dish" style="--at:.77">
+              <circle class="g" cx="106" cy="200" r="27"/>
+              <path class="g" d="M96 191h3M112 188h3M101 202h3M116 199h3M106 210h3"/>
+              <text class="lbl" x="106" y="246" text-anchor="middle">21:00 BURGER</text>
+            </g>
+
+            <!-- the logo mark: tavolino, the small table from above -->
+            <rect class="tbl-mark" x="186" y="186" width="28" height="28"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. reviews ===== -->
+  <section class="rev-sec pad" id="yorumlar">
+    <div class="shell">
+      <div class="rev-head reveal">
+        <div>
+          <p class="kicker">Yorumlar</p>
+          <h2>Bizim değil, onların cümleleri</h2>
+        </div>
+        <p class="lede" style="max-width:36ch">Aşağıdakiler Google ve Yandex'e yazılmış gerçek yorumlar. İsimleri baş harfle kısalttık.</p>
+      </div>
+
+      <div class="revs reveal" id="revs">
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>Fiyat performans olarak Türkiye'de bence en iyilerinden. Yıllardır kaliteyi bozmadan menüde değişiklikler yaparak devam ediyorlar. Yıllardır gideriz.</q>
+          <p class="who">C. A. · Google</p>
+        </blockquote>
+
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>Özellikle kahvaltısı bir harika. O kadar dolu ve lezzetli bir kahvaltısı var ki bitirmeniz mümkün değil. Ayrıca personel çok güler yüzlü, mekan çok nezih.</q>
+          <p class="who">Yandex yorumu</p>
+        </blockquote>
+
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>Tavolino bizim için vazgeçilmez bir cafe ve restoran. Yıllar önce keşfetmiştik. Kalite, lezzet ve fiyat çok iyi. Ortam nezih ve sessiz, çalışanlar bir o kadar ilgili ve başarılı.</q>
+          <p class="who">F. Ö. A. · Google</p>
+        </blockquote>
+
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>Fırsat buldukça gelip yemek yediğim bir yer. Pizzaları, makarnaları, hamburgerleri harika. Mangal pizza favorim.</q>
+          <p class="who">S. T. · Google</p>
+        </blockquote>
+
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>23 Nisan'da öbek öbek çoğalan birçok mekana göre çalışanların üslubu ve özeni başta olmak üzere, kahve ve yiyecek lezzetiyle ve mekan tasarımıyla da öne çıkıyor.</q>
+          <p class="who">K. · Google</p>
+        </blockquote>
+
+        <blockquote class="rev">
+          <div class="stars" aria-label="Beş üzerinden beş"><i></i><i></i><i></i><i></i><i></i></div>
+          <q>Salataları, pizzası, dondurmalı profiterolü ve kahveleri çok lezzetli. Porsiyonları fazlasıyla yeterli. Haftada bir kere mutlaka kafa dinlemeye geliyorum.</q>
+          <p class="who">Y. A. · Google</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. info ===== -->
+  <section class="info-sec pad">
+    <div class="shell">
+      <div class="info-grid reveal">
+        <div class="info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+          <b>Her gün 08:00 - 01:00</b>
+          <span>Hafta sonu dahil. Kapanana kadar mutfak açık.</span>
+        </div>
+        <div class="info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.1 2.1m10 10 2.1 2.1m0-14.2-2.1 2.1m-10 10-2.1 2.1"/></svg>
+          <b>Açık hava bölümü</b>
+          <span>Havası güzel her gün dışarısı da açık.</span>
+        </div>
+        <div class="info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0M16 11a2.5 2.5 0 1 0 0-5M17 20a4.6 4.6 0 0 0-2-3.8"/></svg>
+          <b>Çocuk menüsü</b>
+          <span>Küçükler için ayrı porsiyon ve ayrı fiyat.</span>
+        </div>
+        <div class="info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6.5 6.5 5 4l3 1M17.5 6.5 19 4l-3 1"/><path d="M12 19c-3.6 0-6-2.2-6-5.5S8 7 12 7s6 3.2 6 6.5S15.6 19 12 19Z"/><path d="M10 13h.01M14 13h.01M12 15.5h.01"/></svg>
+          <b>Köpekler içeri alınır</b>
+          <span>Kapıda bırakmanız gerekmiyor. Suyunu da veririz.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. come ===== -->
+  <section class="come pad" id="gel">
+    <div class="shell come-inner">
+      <div class="reveal">
+        <p class="kicker">Gel</p>
+        <h2>Kapıdan girin, yeter</h2>
+        <p class="lede">Rezervasyon şart değil. Kalabalık bir grupsanız bir telefon yeter, yerinizi ayıralım. Park için önümüzdeki sokak genelde boş olur.</p>
+        <p class="addr" style="margin-top:2rem">
+          <b>Tavolino Cafe &amp; Restaurant</b><br>
+          23 Nisan, Mithatpaşa Cd. 17-A<br>
+          16130 Nilüfer / Bursa<br>
+          <br>
+          Her gün 08:00 - 01:00<br>
+          (0224) 999 50 56
+        </p>
+        <div class="row">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tavolino%20Cafe%20%26%20Restaurant%2C%2023%20Nisan%2C%20Mithatpa%C5%9Fa%20Cd.%2017-A%2C%2016130%20Nil%C3%BCfer%2FBursa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Yol tarifi al
+          </a>
+          <a class="btn btn-ghost" href="tel:+902249995056">(0224) 999 50 56</a>
+        </div>
+      </div>
+      <div class="map reveal">
+        <iframe title="Tavolino Cafe and Restaurant harita konumu" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Tavolino%20Cafe%20%26%20Restaurant%2C%2023%20Nisan%2C%20Mithatpa%C5%9Fa%20Cd.%2017-A%2C%2016130%20Nil%C3%BCfer%2FBursa&amp;output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <a class="logo" href="#top" style="--logo-size:.95rem" aria-label="Tavolino, sayfa başına dön">
+        <span class="logo-frame"><span class="logo-mark" aria-hidden="true"></span><span class="logo-word">TAVOLINO</span></span>
+        <span class="logo-sub">CAFE &amp; RESTAURANT</span>
+      </a>
+      <div class="foot-links">
+        <a href="#gun">Bir Gün</a>
+        <a href="#hikaye">Hikaye</a>
+        <a href="#menu">Menü</a>
+        <a href="#yorumlar">Yorumlar</a>
+        <a href="#gel">Gel</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <p>23 Nisan, Mithatpaşa Cd. 17-A, 16130 Nilüfer / Bursa · (0224) 999 50 56</p>
+      <p>Her gün 08:00 - 01:00</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var VIDEO_URL = 'assets/hero-scrub.mp4';
+  var POSTER_URL = 'assets/hero-poster.jpg';
+
+  var hero    = document.getElementById('hero');
+  var stage   = document.getElementById('stage');
+  var video   = document.getElementById('hero-video');
+  var poster  = document.getElementById('poster');
+  var cue     = document.getElementById('cue');
+  var nav     = document.getElementById('nav');
+
+  /* ---------- seeded rng, so "random" is identical every load ---------- */
+  function rng(seed){var s=seed>>>0;return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+
+  /* ---------- split text into word/char spans, once ---------- */
+  function splitBands(){
+    var r = rng(20260817);
+    document.querySelectorAll('.band[data-split]').forEach(function(band){
+      var line = band.querySelector('.line[data-text]');
+      if(!line) return;
+      var text = line.getAttribute('data-text');
+      var em = (band.getAttribute('data-em')||'').split(',').filter(Boolean);
+      var words = text.split(' ');
+
+      var sr = document.createElement('span');
+      sr.className = 'sr-only'; sr.textContent = text;
+
+      var vis = document.createElement('span');
+      vis.className = 'vis'; vis.setAttribute('aria-hidden','true');
+
+      words.forEach(function(word,i){
+        var w = document.createElement('span');
+        w.className = 'w';
+        if(em.indexOf(word) !== -1) w.classList.add('em');
+        w.style.setProperty('--th', (i / Math.max(1,words.length)) * 0.42 + r()*0.05);
+        for(var ci=0; ci<word.length; ci++){
+          var c = document.createElement('span');
+          c.className='c'; c.textContent = word[ci];
+          c.style.setProperty('--th', r()*0.5);
+          c.style.setProperty('--jx', ((r()*2-1)*30).toFixed(1)+'px');
+          c.style.setProperty('--jy', ((r()*2-1)*26).toFixed(1)+'px');
+          c.style.setProperty('--jr', ((r()*2-1)*16).toFixed(1)+'deg');
+          w.appendChild(c);
+        }
+        vis.appendChild(w);
+        if(i < words.length-1) vis.appendChild(document.createTextNode(' '));
+      });
+
+      line.textContent = '';
+      line.appendChild(sr);
+      line.appendChild(vis);
+    });
+  }
+  splitBands();
+
+  /* ---------- band bookkeeping ---------- */
+  var bands = [].slice.call(document.querySelectorAll('.band')).map(function(el){
+    return { el:el, a:parseFloat(el.dataset.a), b:parseFloat(el.dataset.b), op:-1, k:-1 };
+  });
+
+  function smoothstep(p,e0,e1){
+    var t = Math.min(1, Math.max(0, (p-e0)/(e1-e0)));
+    return t*t*(3-2*t);
+  }
+  function clamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
+
+  var loadK = 0, loadStart = 0;
+  var descend = document.getElementById('descend');
+  var lastVeil = -1;
+
+  function updateVeil(p){
+    // the footage brightens into the marble; the veil rises with it so the
+    // late bands stay readable without flattening the opening.
+    var v = smoothstep(p, 0.40, 0.80) * 0.56;
+    if(Math.abs(v - lastVeil) < 0.006) return;
+    lastVeil = v;
+    descend.style.setProperty('--veil', v.toFixed(3));
+  }
+
+  function updateCaptions(p){
+    updateVeil(p);
+    for(var i=0;i<bands.length;i++){
+      var bd = bands[i], a = bd.a, b = bd.b;
+      var f = Math.min(0.02, (b-a)/3);
+      var inRamp  = (i === 0) ? 1 : smoothstep(p, a, a+f);
+      var outRamp = (i === bands.length-1) ? 1 : (1 - smoothstep(p, b-f, b));
+      var op = inRamp * outRamp;
+
+      var ramp = Math.min(0.025, (b-a)*0.35);
+      var k = clamp((p-a)/ramp, 0, 1);
+      if(i === 0) k = Math.max(k, loadK);
+
+      if(Math.abs(op - bd.op) > 0.004){ bd.op = op; bd.el.style.opacity = op.toFixed(3); }
+      if(Math.abs(k - bd.k) > 0.008){
+        bd.k = k;
+        bd.el.style.setProperty('--k', k.toFixed(3));
+        if(i === bands.length-1){
+          bd.el.style.setProperty('--ks', clamp((k-0.5)*2.4,0,1).toFixed(3));
+          bd.el.style.setProperty('--kb', clamp((k-0.68)*3.2,0,1).toFixed(3));
+        }
+      }
+    }
+  }
+
+  /* ---------- gated seeks ---------- */
+  var seekBusy = false, pendingTime = null, seekWatch = null;
+
+  function clearSeek(){
+    clearTimeout(seekWatch);
+    seekBusy = false;
+    if(pendingTime !== null){ var t = pendingTime; pendingTime = null; requestSeek(t); }
+  }
+
+  function requestSeek(t){
+    if(!video.duration || !isFinite(video.duration)) return;
+    if(seekBusy){ pendingTime = t; return; }
+    seekBusy = true;
+    clearTimeout(seekWatch);
+    // A seek that never reports back would pin the hero on one frame forever
+    // while the captions kept working, which reads as "the video is broken".
+    // The busy flag has to be able to free itself.
+    seekWatch = setTimeout(function(){
+      seekBusy = false;
+      if(pendingTime !== null){ var q = pendingTime; pendingTime = null; requestSeek(q); }
+    }, 900);
+    try { video.currentTime = t; } catch(e){ clearTimeout(seekWatch); seekBusy = false; }
+  }
+
+  video.addEventListener('seeked', clearSeek);
+  video.addEventListener('error', function(){
+    clearTimeout(seekWatch); seekBusy = false; pendingTime = null; failVideo();
+  });
+
+  /* ---------- the drive loop ---------- */
+  var target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true;
+
+  function heroProgress(){
+    var range = hero.offsetHeight - window.innerHeight;
+    if(range <= 0) return 0;
+    return clamp(-hero.getBoundingClientRect().top / range, 0, 1);
+  }
+
+  function tick(now){
+    var dt = Math.min(100, now - (lastTick || now));
+    lastTick = now;
+    var k = 0.16;
+    shown += (target - shown) * (1 - Math.pow(1-k, dt/16.667));
+
+    if(loadK < 1 && loadStart){
+      loadK = clamp((now - loadStart) / 900, 0, 1);
+    }
+
+    var converged = Math.abs(target - shown) < 0.0005 && loadK >= 1;
+    if(converged){ shown = target; rafId = null; lastTick = 0; }
+    else { rafId = requestAnimationFrame(tick); }
+
+    if(video.duration) requestSeek(shown * video.duration);
+    updateCaptions(shown);
+  }
+
+  function kick(){ if(rafId === null && heroOnScreen) rafId = requestAnimationFrame(tick); }
+
+  function onScroll(){
+    target = heroProgress();
+    if(target > 0.015) stage.classList.add('hero-scrolled');
+    else stage.classList.remove('hero-scrolled');
+    kick();
+  }
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){
+      heroOnScreen = en[0].isIntersecting;
+      if(heroOnScreen) kick();
+    },{rootMargin:'10px'}).observe(hero);
+  }
+
+  /* ---------- hero media, only inside the gated path ---------- */
+  var heroInit = false;
+  function initHeroOnce(){
+    if(heroInit) return; heroInit = true;
+    poster.style.backgroundImage = "url('" + POSTER_URL + "')";
+    loadStart = performance.now();
+
+    function attach(src){
+      // preload="none" ships in the markup so gated visitors never fetch a byte.
+      // The moment we decide to load, it has to come off, or some browsers
+      // honour it, never buffer, never fire a readiness event, and the hero
+      // sits on the poster forever.
+      video.preload = 'auto';
+      video.src = src;
+      video.load();
+
+      var revealed = false;
+      function reveal(){
+        if(revealed) return;
+        if(!video.duration || !isFinite(video.duration)) return;
+        revealed = true;
+        requestSeek(heroProgress() * video.duration);
+        stage.classList.add('video-ready');
+      }
+      // no single event is reliable everywhere, so listen to all of them
+      ['loadedmetadata','loadeddata','canplay','canplaythrough','seeked','progress']
+        .forEach(function(ev){ video.addEventListener(ev, reveal); });
+      // and a backstop, in case a browser buffers without ever telling us
+      var tries = 0;
+      var poll = setInterval(function(){
+        reveal();
+        if(revealed || ++tries > 40) clearInterval(poll);
+      }, 250);
+    }
+
+    // The Blob path is what makes scrubbing work on hosts with no partial
+    // download support. It cannot run on file:// though, where fetch is
+    // blocked, so fall back to the plain URL there: seeking a local file
+    // works fine, and double-clicking index.html shows the real journey.
+    fetch(VIDEO_URL).then(function(res){
+      if(!res.ok) throw new Error('http ' + res.status);
+      return res.blob();
+    }).then(function(blob){
+      attach(URL.createObjectURL(blob));
+    }).catch(function(){
+      try { attach(VIDEO_URL); } catch(e){ failVideo(); }
+    });
+  }
+  function failVideo(){ stage.classList.add('video-failed'); }
+
+  /* ---------- the five static-hero gates, live in both directions ---------- */
+  // These four must stay character-for-character identical to the CSS block.
+  // Reduced motion is intentionally absent: the owner chose to play the hero
+  // for every visitor. Size gates remain, because a phone has no room for it.
+  var GATES = [
+    '(max-width: 720px)',
+    '(orientation: portrait) and (max-width: 1024px)',
+    '(orientation: portrait) and (pointer: coarse)',
+    '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)'
+  ];
+  var MQLS = GATES.map(function(q){ return matchMedia(q); });
+  var scrubOn = false;
+
+  function enableScrub(){
+    if(scrubOn) return; scrubOn = true;
+    initHeroOnce();
+    window.addEventListener('scroll', onScroll, {passive:true});
+    bands.forEach(function(b){ b.op = -1; b.k = -1; });
+    updateCaptions(heroProgress());
+    onScroll();
+  }
+  function disableScrub(){
+    if(!scrubOn) return; scrubOn = false;
+    window.removeEventListener('scroll', onScroll);
+    if(rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
+  }
+  function applyHeroMode(){
+    if(MQLS.some(function(m){ return m.matches; })) disableScrub();
+    else enableScrub();
+  }
+  MQLS.forEach(function(m){
+    if(m.addEventListener) m.addEventListener('change', applyHeroMode);
+    else if(m.addListener) m.addListener(applyHeroMode);
+  });
+  applyHeroMode();
+  window.addEventListener('resize', function(){ if(scrubOn) onScroll(); }, {passive:true});
+
+  /* the static hero paints its own still, independent of the scrub path */
+  var stillEl = document.getElementById('poster-still');
+  if(stillEl) stillEl.style.backgroundImage = "url('assets/hero-ending.jpg')";
+  var storyImg = document.getElementById('story-img');
+  if(storyImg) storyImg.src = 'assets/story.jpg';
+
+  /* ---------- nav state ---------- */
+  var navLast = null;
+  window.addEventListener('scroll', function(){
+    var solid = window.scrollY > 40;
+    if(solid !== navLast){ navLast = solid; nav.classList.toggle('solid', solid); }
+  }, {passive:true});
+
+  /* ---------- section entrances ---------- */
+  if('IntersectionObserver' in window){
+    var revObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('in');
+        revObs.unobserve(e.target);
+        setTimeout(function(){ e.target.classList.add('done'); }, 1400);
+      });
+    },{threshold:0.14, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ revObs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in','done'); });
+  }
+
+  /* ---------- the hour rail ---------- */
+  var rail = document.getElementById('rail');
+  var railCursor = document.getElementById('rail-cursor');
+  var railLine = rail ? rail.querySelector('.rail-line span') : null;
+  var hours = rail ? [].slice.call(rail.querySelectorAll('.hour')) : [];
+  var railLastP = -1;
+
+  function updateRail(){
+    if(!rail) return;
+    var r = rail.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = clamp((vh * 0.62 - r.top) / Math.max(1, r.height), 0, 1);
+    if(Math.abs(p - railLastP) < 0.004) return;
+    railLastP = p;
+    rail.style.setProperty('--railp', p.toFixed(3));
+    if(railLine) railLine.style.height = (p*100).toFixed(1) + '%';
+    for(var i=0;i<hours.length;i++){
+      var lit = (i / hours.length) <= p + 0.001;
+      if(hours[i].classList.contains('lit') !== lit) hours[i].classList.toggle('lit', lit);
+    }
+  }
+  window.addEventListener('scroll', updateRail, {passive:true});
+  window.addEventListener('resize', updateRail, {passive:true});
+  updateRail();
+
+  /* ---------- the one interactive moment: set the table ---------- */
+  var setSec = document.getElementById('masa');
+  var tableBtn = document.getElementById('table-btn');
+  var wrap = tableBtn ? tableBtn.closest('.table-wrap') : null;
+  var hold = 0, holding = false, holdRaf = null, holdLast = 0;
+  var reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function holdTick(now){
+    var dt = Math.min(100, now - (holdLast || now));
+    holdLast = now;
+    var dir = holding ? 1 : -1;
+    var speed = holding ? 1/1500 : -1/900;
+    hold = clamp(hold + dt * Math.abs(speed) * dir, 0, 1);
+    wrap.style.setProperty('--hold', hold.toFixed(3));
+    if(hold >= 1) setSec.classList.add('complete');
+    if((holding && hold < 1) || (!holding && hold > 0)){
+      holdRaf = requestAnimationFrame(holdTick);
+    } else { holdRaf = null; holdLast = 0; }
+  }
+  function startHold(e){
+    if(e && e.cancelable) e.preventDefault();
+    if(reduceMQ.matches){ hold = 1; wrap.style.setProperty('--hold','1'); setSec.classList.add('complete'); return; }
+    holding = true;
+    if(holdRaf === null) holdRaf = requestAnimationFrame(holdTick);
+  }
+  function endHold(){
+    holding = false;
+    if(holdRaf === null && hold > 0) holdRaf = requestAnimationFrame(holdTick);
+  }
+  if(tableBtn && wrap){
+    tableBtn.addEventListener('pointerdown', startHold);
+    ['pointerup','pointercancel','pointerleave','blur'].forEach(function(ev){
+      tableBtn.addEventListener(ev, endHold);
+    });
+    tableBtn.addEventListener('keydown', function(e){
+      if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); startHold(); }
+    });
+    tableBtn.addEventListener('keyup', function(e){
+      if(e.key === ' ' || e.key === 'Enter'){ endHold(); }
+    });
+  }
+
+  /* ---------- reduced motion, honoured live in both directions ---------- */
+  function pinToFinalStates(){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in','done'); });
+    if(rail){
+      rail.style.setProperty('--railp','1');
+      if(railLine) railLine.style.height = '100%';
+      hours.forEach(function(h){ h.classList.add('lit'); });
+    }
+    if(wrap){ hold = 1; wrap.style.setProperty('--hold','1'); setSec.classList.add('complete'); }
+    if(holdRaf !== null){ cancelAnimationFrame(holdRaf); holdRaf = null; }
+  }
+  function unpinFinalStates(){
+    railLastP = -1;
+    updateRail();
+  }
+  // Reduced motion calms the page's decorative drives but no longer stops the
+  // hero: that was the owner's call. The scrub is armed by the size gates alone.
+  reduceMQ.addEventListener('change', function(e){
+    if(e.matches) pinToFinalStates();
+    else { unpinFinalStates(); applyHeroMode(); }
+  });
+  if(reduceMQ.matches) pinToFinalStates();
+
+  /* ---------- pause every animation on a hidden tab ---------- */
+  document.addEventListener('visibilitychange', function(){
+    document.body.classList.toggle('paused', document.hidden);
+  });
+
+  /* ---------- diagnostics: add #tani to the address to see the hero's state ---------- */
+  if(location.hash === '#tani'){
+    var dbg = document.createElement('pre');
+    dbg.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:999;background:rgba(6,4,8,.94);' +
+      'color:#B98CF0;font:12px/1.7 ui-monospace,monospace;padding:14px 16px;border:1px solid #6D3FA8;' +
+      'max-width:92vw;white-space:pre-wrap;pointer-events:none';
+    document.body.appendChild(dbg);
+    setInterval(function(){
+      dbg.textContent =
+        'video adresi : ' + (video.src ? 'VAR' : 'YOK') + '\n' +
+        'video suresi : ' + (video.duration || '-') + '\n' +
+        'readyState   : ' + video.readyState + '   (2 ve uzeri iyi)\n' +
+        'networkState : ' + video.networkState + '   (3 ise kaynak bulunamadi)\n' +
+        'video hatasi : ' + (video.error ? ('KOD ' + video.error.code + ' ' + video.error.message) : 'yok') + '\n' +
+        'sahne sinifi : ' + stage.className + '\n' +
+        'video zamani : ' + (video.currentTime || 0).toFixed(2) + '\n' +
+        'kaydirma     : ' + Math.round(heroProgress() * 100) + '%\n' +
+        'seek mesgul  : ' + seekBusy + '\n' +
+        'scrub aktif  : ' + scrubOn;
+    }, 300);
+  }
+})();
+</script>
+</body>
+</html>
