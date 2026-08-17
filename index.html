@@ -301,15 +301,27 @@ img{max-width:100%;display:block}
 .static-hero .sub{color:var(--text-primary);max-width:32ch;text-shadow:var(--tshadow)}
 .static-hero .row{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.6rem}
 
-/* Four gates, not five. Reduced motion deliberately does NOT gate the hero:
-   the owner asked for the journey to play for every visitor. The rest of the
-   page still calms down under reduced motion, in the block near the end. */
-@media (max-width:720px),
-       (orientation:portrait) and (max-width:1024px),
-       (orientation:portrait) and (pointer:coarse),
-       (orientation:landscape) and (pointer:coarse) and (max-height:560px){
+/* One gate left. Reduced motion and small screens no longer fall back: the
+   owner wants the journey on phones too, and the encode is small enough
+   (3.4 MB) and centre-composed enough to survive a portrait crop. The only
+   case still handed the still hero is a phone held sideways, which has no
+   vertical room for a scroll journey at all. */
+@media (orientation:landscape) and (pointer:coarse) and (max-height:500px){
   .hero{display:none}
   .static-hero{display:block}
+}
+
+/* phones: the journey plays, so the words move out of the table's way */
+@media (max-width:720px){
+  .hero{height:340vh}
+  .band-1,.band-2{left:1.15rem;right:1.15rem;max-width:none;top:15vh}
+  .band-1 .line,.band-2 .line{font-size:clamp(2rem,9.4vw,2.8rem)}
+  .band-2{top:15vh}
+  .band-4{top:11vh;width:calc(100% - 2.3rem)}
+  .band-4 .line{font-size:clamp(2.2rem,11vw,3.2rem)}
+  .band-4 .sub{font-size:.68rem;letter-spacing:.13em;padding:.55rem .85rem}
+  .band-4 .cta-row{margin-top:1.5rem}
+  .band::before{inset:-14% -20%}
 }
 
 /* ---------- section furniture ---------- */
@@ -1181,14 +1193,11 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   function failVideo(){ stage.classList.add('video-failed'); }
 
   /* ---------- the five static-hero gates, live in both directions ---------- */
-  // These four must stay character-for-character identical to the CSS block.
-  // Reduced motion is intentionally absent: the owner chose to play the hero
-  // for every visitor. Size gates remain, because a phone has no room for it.
+  // Must stay character-for-character identical to the CSS block above.
+  // Only one case still gets the still hero: a phone held sideways, where
+  // there is no vertical room for a scroll journey.
   var GATES = [
-    '(max-width: 720px)',
-    '(orientation: portrait) and (max-width: 1024px)',
-    '(orientation: portrait) and (pointer: coarse)',
-    '(orientation: landscape) and (pointer: coarse) and (max-height: 560px)'
+    '(orientation: landscape) and (pointer: coarse) and (max-height: 500px)'
   ];
   var MQLS = GATES.map(function(q){ return matchMedia(q); });
   var scrubOn = false;
